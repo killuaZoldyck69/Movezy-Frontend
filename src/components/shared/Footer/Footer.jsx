@@ -3,7 +3,6 @@ import { Input } from "@/components/ui/input";
 import {
   Facebook,
   Instagram,
-  InstagramIcon,
   LinkedinIcon,
   MailIcon,
   MapIcon,
@@ -17,7 +16,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-black text-white">
-      <div className="max-w-7xl mx-auto px-4 py-16">
+      <div className="w-11/12 md:w-2xl lg:w-7xl mx-auto px-4 py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
