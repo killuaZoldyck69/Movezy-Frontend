@@ -1,6 +1,7 @@
 import React from "react";
 import { BellRingIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -12,7 +13,7 @@ const Navbar = () => {
           </h3>
           <ul className="flex items-center gap-3">
             <li>
-              <a>Home</a>
+              <Link to={"/"}>Home</Link>
             </li>
             <li>
               <a>
@@ -20,9 +21,9 @@ const Navbar = () => {
               </a>
             </li>
             <li>
-              <a>
+              <Link to={"/auth/login"}>
                 <Button className="bg-red-600">Login</Button>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
