@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import loginImg from "../../assets/login.jpg";
 import { useForm } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,15 +7,39 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import AuthContext from "@/providers/AuthContext";
 
 const Login = () => {
+  const { loginUser, loginWithGoogle } = useContext(AuthContext);
+
+  const onSubmit = (data) => {
+    const email = data.email;
+    const password = data.password;
+    loginUser(email, password)
+      .then((result) => {
+        console.log("Login Successful", result.user);
+      })
+      .catch((errors) => {
+        console.log(errors);
+      });
+  };
+
+  const handleLoginWithGoogle = () => {
+    loginWithGoogle()
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
   return (
     <div className="h-[calc(100vh-76px)] md:h-auto lg:h-[calc(100vh-76px)] bg-black flex items-center justify-center p-4">
       <Card className="w-11/12 lg:w-4/6">
@@ -101,7 +125,7 @@ const Login = () => {
                   type="button"
                   //   variant="outline"
                   className="w-full"
-                  //   onClick={handleGoogleLogin}
+                  onClick={handleLoginWithGoogle}
                 >
                   <FcGoogle className="mr-2 h-5 w-5" />
                   Login with Google

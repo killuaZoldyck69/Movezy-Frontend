@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import signupImg from "../../assets/signup.jpg";
 import { useForm } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,15 +9,56 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { FaPhone } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import AuthContext from "@/providers/AuthContext";
 
 const Signup = () => {
+  const { signupUser, loginWithGoogle, profileUpdate } =
+    useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    signupUser(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+        profileUpdate({
+          displayName: data.name,
+          photoURL: data.photoUrl,
+        })
+          .then(() => {
+            console.log("profile updated");
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+              photoURL: data.photoUrl,
+              phoneNumber: data.phoneNumber, // Add phone number to user info
+              userType: data.userType || "user",
+              createdAt: new Date(),
+            };
+            console.log(userInfo);
+          })
+          .catch((error) => {
+            console.log(error, "error");
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleLoginWithGoogle = () => {
+    loginWithGoogle()
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="h-[calc(100vh-76px)] md:h-auto lg:h-[calc(100vh-76px)] bg-black flex items-center justify-center p-4">
       <Card className="w-11/12  lg:w-4/6">
@@ -177,16 +218,15 @@ const Signup = () => {
 
                 <Button
                   type="button"
-                  //   variant="outline"
                   className="w-full"
-                  //   onClick={handleLoginWithGoogle}
+                  onClick={handleLoginWithGoogle}
                 >
                   <FcGoogle className="mr-2 h-5 w-5" />
                   Sign up with Google
                 </Button>
 
                 <p className="text-center text-sm">
-                  Already have an account?{" "}
+                  Already have an account?
                   <Link
                     to="/auth/login"
                     className="text-red-600 hover:underline"
