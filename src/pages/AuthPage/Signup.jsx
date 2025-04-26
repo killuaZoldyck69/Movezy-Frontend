@@ -8,12 +8,15 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { FaPhone } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "@/providers/AuthContext";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 
 const Signup = () => {
   const { signupUser, loginWithGoogle, profileUpdate } =
     useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -34,11 +37,17 @@ const Signup = () => {
               name: data.name,
               email: data.email,
               photoURL: data.photoUrl,
-              phoneNumber: data.phoneNumber, // Add phone number to user info
+              phoneNumber: data.phoneNumber,
               userType: data.userType || "user",
               createdAt: new Date(),
             };
             console.log(userInfo);
+
+            axiosPublic.post("users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                navigate("/");
+              }
+            });
           })
           .catch((error) => {
             console.log(error, "error");
@@ -231,6 +240,7 @@ const Signup = () => {
                     to="/auth/login"
                     className="text-red-600 hover:underline"
                   >
+                    {" "}
                     Login here
                   </Link>
                 </p>
