@@ -6,11 +6,25 @@ import { Mail, RectangleEllipsis } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "@/providers/AuthContext";
+import { Bounce, toast } from "react-toastify";
 
 const Login = () => {
   const { loginUser, loginWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const notify = () =>
+    toast.success("Login successful", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
 
   const onSubmit = (data) => {
     const email = data.email;
@@ -18,6 +32,8 @@ const Login = () => {
     loginUser(email, password)
       .then((result) => {
         console.log("Login Successful", result.user);
+        navigate("/");
+        notify();
       })
       .catch((errors) => {
         console.log(errors);
@@ -28,6 +44,8 @@ const Login = () => {
     loginWithGoogle()
       .then((result) => {
         console.log(result.user);
+        navigate("/");
+        notify();
       })
       .catch((error) => {
         console.log(error);

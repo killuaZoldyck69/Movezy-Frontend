@@ -11,14 +11,28 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { FaSignOutAlt } from "react-icons/fa";
+import { Bounce, toast } from "react-toastify";
 
 const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const notify = () =>
+    toast.error("Logout successful", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
 
   const handleLogout = () => {
     logoutUser().then(() => {
       console.log("Logout successfully");
+      notify();
     });
   };
 
