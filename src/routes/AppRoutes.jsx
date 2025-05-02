@@ -1,7 +1,9 @@
 import AuthLayout from "@/layouts/AuthLayout";
+import DashBoardLayout from "@/layouts/DashBoardLayout";
 import MainLayout from "@/layouts/MainLayout";
 import Login from "@/pages/AuthPage/Login";
 import Signup from "@/pages/AuthPage/Signup";
+import DashBoard from "@/pages/DashBoard/DashBoard";
 import HomePage from "@/pages/HomePage/HomePage";
 import { createBrowserRouter } from "react-router-dom";
 export const router = createBrowserRouter([
@@ -26,6 +28,16 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup></Signup>,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <DashBoardLayout></DashBoardLayout>,
+    children: [
+      {
+        index: true,
+        // element: <DashBoard></DashBoard>,
       },
     ],
   },
