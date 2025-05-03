@@ -1,3 +1,4 @@
+import ErrorPage from "@/components/shared/ErrorPage/ErrorPage";
 import AuthLayout from "@/layouts/AuthLayout";
 import DashBoardLayout from "@/layouts/DashBoardLayout";
 import MainLayout from "@/layouts/MainLayout";
@@ -10,6 +11,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -20,6 +22,7 @@ export const router = createBrowserRouter([
   {
     path: "auth",
     element: <AuthLayout></AuthLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "login",
