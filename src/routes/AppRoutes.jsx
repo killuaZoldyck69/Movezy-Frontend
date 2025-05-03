@@ -3,7 +3,7 @@ import DashBoardLayout from "@/layouts/DashBoardLayout";
 import MainLayout from "@/layouts/MainLayout";
 import Login from "@/pages/AuthPage/Login";
 import Signup from "@/pages/AuthPage/Signup";
-import DashBoard from "@/pages/DashBoard/DashBoard";
+import MyProfile from "@/pages/DashBoard/MyProfile";
 import HomePage from "@/pages/HomePage/HomePage";
 import { createBrowserRouter } from "react-router-dom";
 export const router = createBrowserRouter([
@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        // element: <DashBoard></DashBoard>,
+        element: <MyProfile></MyProfile>,
       },
     ],
   },

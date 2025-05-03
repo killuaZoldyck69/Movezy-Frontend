@@ -10,11 +10,13 @@ import {
 } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const provider = new GoogleAuthProvider();
+  const axiosPublic = useAxiosPublic();
 
   const signupUser = (email, password) => {
     setLoading(true);
@@ -41,15 +43,37 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+
+      if (currentUser) {
+        const userInfo = { email: currentUser.email };
+
+        try {
+          const response = await axiosPublic.post("/jwt", userInfo);
+
+          if (response.data.token) {
+            localStorage.setItem("access-token", response.data.token);
+            console.log("JWT token stored successfully");
+          } else {
+            console.warn("Token not received from server");
+          }
+        } catch (error) {
+          console.error(
+            "Error generating JWT token:",
+            error.response?.data || error.message
+          );
+        }
+      } else {
+        localStorage.removeItem("access-token");
+        console.log("User logged out, token removed");
+      }
+
       setLoading(false);
-      console.log("current user -->", currentUser);
     });
 
-    // Cleanup the observer when component unmounts
     return () => unsubscribe();
-  }, []);
+  }, [axiosPublic]);
 
   const authInfo = {
     user,

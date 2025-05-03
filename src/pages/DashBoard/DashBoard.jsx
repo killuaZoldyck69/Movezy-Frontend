@@ -22,7 +22,7 @@ const DashBoard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Mobile sidebar state
 
   const userMenus = [
-    { to: "/dashboard/my-profile", label: "My Profile", icon: <FaUser /> },
+    { to: "/dashboard", label: "My Profile", icon: <FaUser /> },
     { to: "/dashboard/book-parcel", label: "Book a Parcel", icon: <FaBox /> },
     { to: "/dashboard/my-parcels", label: "My Parcels", icon: <FaBoxOpen /> },
     {

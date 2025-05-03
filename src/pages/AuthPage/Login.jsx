@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import loginImg from "../../assets/login.jpg";
 import { useForm } from "react-hook-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,11 +7,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-import AuthContext from "@/providers/AuthContext";
 import { Bounce, toast } from "react-toastify";
+import useAuth from "@/hooks/useAuth";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 
 const Login = () => {
-  const { loginUser, loginWithGoogle } = useContext(AuthContext);
+  const { loginUser, loginWithGoogle } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const notify = () =>
     toast.success("Login successful", {
@@ -43,12 +45,30 @@ const Login = () => {
   const handleLoginWithGoogle = () => {
     loginWithGoogle()
       .then((result) => {
-        console.log(result.user);
-        navigate("/");
-        notify();
+        const userInfo = {
+          name: result.user?.displayName,
+          email: result.user?.email,
+          photoURL: result.user?.photoURL,
+          phoneNumber: result.user?.phoneNumber || "",
+          userType: "user",
+          createdAt: new Date(),
+        };
+
+        axiosPublic
+          .post("users", userInfo)
+          .then((res) => {
+            console.log(res.data);
+            navigate("/");
+            notify();
+          })
+          .catch((error) => {
+            console.log("Error saving user:", error);
+            toast.error("Registration failed");
+          });
       })
       .catch((error) => {
         console.log(error);
+        toast.error(error.message || "Google sign-in failed");
       });
   };
 
