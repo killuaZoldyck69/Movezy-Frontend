@@ -16,12 +16,12 @@ const MyProfile = () => {
   });
 
   return (
-    <div className="container mx-auto max-w-3xl p-10 border rounded-xl bg-black">
-      <h1 className="text-3xl text-white text-center font-bold mb-6 flex justify-center gap-5">
+    <div className="container mx-auto max-w-3xl p-10 my-20 shadow-2xl shadow-red-400 rounded-xl">
+      <h1 className="text-3xl text-black text-center font-bold mb-6 flex justify-center gap-5">
         <FaUserAlt></FaUserAlt> My Profile
       </h1>
 
-      <Card className="p-6">
+      <Card className="p-6 border-none shadow-none">
         <div className="flex flex-col md:flex-row gap-6">
           {/* Left section - Profile image */}
           <div className="w-full md:w-64 shrink-0">
