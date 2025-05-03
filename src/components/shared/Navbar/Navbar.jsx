@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { BellRingIcon } from "lucide-react";
+import { BellRingIcon, Ghost, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import AuthContext from "@/providers/AuthContext";
@@ -40,22 +40,29 @@ const Navbar = () => {
     <div className="w-11/12 md:w-2xl lg:w-7xl py-5 mx-auto">
       <header>
         <div className="flex items-center justify-between">
-          <h3 className="text-2xl md:text-3xl font-bold text-black">
-            Move<span className="text-red-600">Zy</span>
-          </h3>
+          <Link to="/">
+            <h3 className="text-2xl md:text-3xl font-bold text-black">
+              Move<span className="text-red-600">Zy</span>
+            </h3>
+          </Link>
           <ul className="flex items-center gap-3">
-            <li>
+            <li className="font-medium">
               <Link to={"/"}>Home</Link>
             </li>
             <li>
               <a>
-                <BellRingIcon />
+                <BellRingIcon fill="#f56556" color="#773131" />
               </a>
             </li>
             {/* Login Button / Profile Picture */}
             {!user ? (
               <Link to="/auth/login">
-                <Button className="bg-red-500 hover:bg-red-600 ">Login</Button>
+                <Button
+                  variant="transparent"
+                  className="bg-green-200 hover:cursor-pointer hover:scale-105 font-semibold text-green-500"
+                >
+                  <LogIn /> Login
+                </Button>
               </Link>
             ) : (
               <DropdownMenu

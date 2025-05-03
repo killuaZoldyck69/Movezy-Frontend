@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   FaBars,
@@ -14,12 +14,34 @@ import {
   FaBoxOpen,
   FaHome,
   FaHistory,
+  FaSignOutAlt,
 } from "react-icons/fa";
-import { MdSpaceDashboard } from "react-icons/md";
+import useAuth from "@/hooks/useAuth";
+import { Bounce, toast } from "react-toastify";
 
 const DashBoard = () => {
   const userType = "user"; // Get userType
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Mobile sidebar state
+  const { logoutUser } = useAuth();
+  const notify = () =>
+    toast.error("Logout successful", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+
+  const handleLogout = () => {
+    logoutUser().then(() => {
+      console.log("Logout successfully");
+      notify();
+    });
+  };
 
   const userMenus = [
     { to: "/dashboard/my-profile", label: "My Profile", icon: <FaUser /> },
@@ -111,15 +133,20 @@ const DashBoard = () => {
                   : "w-full flex items-center"
               }
             >
-              <Button
-                // variant="ghost"
-                className="w-full bg-transparent justify-start gap-3 hover:cursor-pointer text-xl py-8 hover:bg-red-600"
-              >
+              <Button className="w-full bg-transparent justify-start gap-3 hover:cursor-pointer text-xl py-8 hover:bg-red-600">
                 {menu.icon}
                 {menu.label}
               </Button>
             </NavLink>
           ))}
+          <Link to="/">
+            <Button
+              onClick={handleLogout}
+              className="w-full bg-transparent justify-start gap-3 hover:cursor-pointer text-xl py-8 hover:bg-red-600"
+            >
+              <FaSignOutAlt /> Logout
+            </Button>
+          </Link>
         </nav>
       </div>
     </div>

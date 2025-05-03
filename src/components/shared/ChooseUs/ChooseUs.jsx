@@ -32,7 +32,7 @@ const ChooseUs = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
         {/* First row */}
-        <Card className="border-0 shadow-sm hover:shadow-2xl">
+        <Card className="border-0 shadow-sm hover:shadow-xl hover:scale-105 hover:shadow-red-300">
           <CardHeader className="flex items-center justify-center pb-2">
             <div className="relative">
               <Activity className="h-12 w-12" />
@@ -51,7 +51,7 @@ const ChooseUs = () => {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-sm hover:shadow-2xl">
+        <Card className="border-0 shadow-sm hover:shadow-xl hover:scale-105 hover:shadow-red-300">
           <CardHeader className="flex items-center justify-center pb-2">
             <div className="relative">
               <Globe className="h-12 w-12" />
@@ -67,7 +67,7 @@ const ChooseUs = () => {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-sm hover:shadow-2xl">
+        <Card className="border-0 shadow-sm hover:shadow-xl hover:scale-105 hover:shadow-red-300">
           <CardHeader className="flex items-center justify-center pb-2">
             <div className="relative">
               <Clock className="h-12 w-12" />
@@ -86,7 +86,7 @@ const ChooseUs = () => {
 
       {/* Second row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <Card className="border-0 shadow-sm hover:shadow-2xl">
+        <Card className="border-0 shadow-sm hover:shadow-xl hover:scale-105 hover:shadow-red-300">
           <CardHeader className="flex items-center justify-center pb-2">
             <div className="relative">
               <Calendar className="h-12 w-12" />
@@ -102,7 +102,7 @@ const ChooseUs = () => {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-sm hover:shadow-2xl">
+        <Card className="border-0 shadow-sm hover:shadow-xl hover:scale-105 hover:shadow-red-300">
           <CardHeader className="flex items-center justify-center pb-2">
             <div className="relative">
               <Banknote className="h-12 w-12" />
@@ -117,7 +117,7 @@ const ChooseUs = () => {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-sm hover:shadow-2xl">
+        <Card className="border-0 shadow-sm hover:shadow-xl hover:scale-105 hover:shadow-red-300">
           <CardHeader className="flex items-center justify-center pb-2">
             <div className="relative">
               <Shield className="h-12 w-12" />

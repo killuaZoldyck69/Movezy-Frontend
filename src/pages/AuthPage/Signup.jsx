@@ -103,8 +103,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="h-[calc(100vh-76px)] md:h-auto lg:h-[calc(100vh-76px)] bg-black flex items-center justify-center p-4">
-      <Card className="w-11/12  lg:w-4/6">
+    <div className="h-[calc(100vh-76px)] md:h-auto lg:h-[calc(100vh-76px)] flex items-center justify-center p-4">
+      <Card className="w-11/12  lg:w-4/6 shadow-2xl shadow-red-400 border-none">
         <div className="grid md:grid-cols-2 items-center gap-0">
           {/* Image Side */}
           <div className="hidden md:block h-full p-4 sm:p-6">
@@ -243,7 +243,7 @@ const Signup = () => {
 
                 <Button
                   type="submit"
-                  className="w-full  bg-red-600 hover:bg-red-700"
+                  className="w-full  bg-red-600 hover:bg-red-700 hover:scale-105"
                 >
                   Sign up
                 </Button>
@@ -261,7 +261,7 @@ const Signup = () => {
 
                 <Button
                   type="button"
-                  className="w-full"
+                  className="w-full hover:scale-105"
                   onClick={handleLoginWithGoogle}
                 >
                   <FcGoogle className="mr-2 h-5 w-5" />
