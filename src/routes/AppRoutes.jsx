@@ -6,6 +6,8 @@ import Login from "@/pages/AuthPage/Login";
 import Signup from "@/pages/AuthPage/Signup";
 import MyProfile from "@/pages/DashBoard/MyProfile";
 import BookParcel from "@/pages/DashBoard/User/BookParcel";
+import MyParcels from "@/pages/DashBoard/User/MyParcels";
+import UpdateBooking from "@/pages/DashBoard/User/UpdateBooking";
 import HomePage from "@/pages/HomePage/HomePage";
 import { createBrowserRouter } from "react-router-dom";
 export const router = createBrowserRouter([
@@ -47,6 +49,15 @@ export const router = createBrowserRouter([
       {
         path: "book-parcel",
         element: <BookParcel></BookParcel>,
+      },
+      {
+        path: "my-parcels",
+        element: <MyParcels></MyParcels>,
+      },
+      {
+        path: "update-parcel/:id",
+        element: <UpdateBooking></UpdateBooking>,
+        loader: ({ params }) => fetch(`update-parcel/${params.id}`),
       },
     ],
   },
