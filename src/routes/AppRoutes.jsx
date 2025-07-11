@@ -15,6 +15,7 @@ import AdminRoutes from "./AdminRoutes";
 import AllParcels from "@/pages/DashBoard/Admin/AllParcels";
 import AllUsers from "@/pages/DashBoard/Admin/AllUsers";
 import Statistics from "@/pages/DashBoard/Admin/Statistics";
+import AllDeliveryMen from "@/pages/DashBoard/Admin/AllDeliveryMen";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -71,7 +72,7 @@ export const router = createBrowserRouter([
 
       // admin routes
       {
-        path: "/dashboard/statistics",
+        path: "statistics",
         element: (
           <AdminRoutes>
             <Statistics />
@@ -79,7 +80,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/all-users",
+        path: "all-users",
         element: (
           <AdminRoutes>
             <AllUsers />
@@ -87,21 +88,21 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/all-parcels",
+        path: "all-parcels",
         element: (
           <AdminRoutes>
             <AllParcels />
           </AdminRoutes>
         ),
       },
-      // {
-      //   path: "/dashboard/all-delivery-men",
-      //   element: (
-      //     <AdminRoutes>
-      //       <AllDeliveryMen />
-      //     </AdminRoutes>
-      //   ),
-      // },
+      {
+        path: "all-delivery-men",
+        element: (
+          <AdminRoutes>
+            <AllDeliveryMen />
+          </AdminRoutes>
+        ),
+      },
     ],
   },
 ]);
