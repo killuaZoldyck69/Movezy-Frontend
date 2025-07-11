@@ -4,9 +4,11 @@ import { Card } from "@/components/ui/card";
 import { Pencil, Upload } from "lucide-react";
 import useAuth from "@/hooks/useAuth";
 import { FaUserAlt, FaUserAltSlash } from "react-icons/fa";
+import useType from "@/hooks/useType";
 
 const MyProfile = () => {
   const { user } = useAuth();
+  const [userType] = useType();
   const [userData] = useState({
     name: "User name",
     email: "mi@xpaytech.co",
@@ -64,9 +66,7 @@ const MyProfile = () => {
 
               <div>
                 <p className="text-sm text-gray-500 mb-1">User Type:</p>
-                <p className="border-b border-gray-400 w-fit">
-                  {userData.userType}
-                </p>
+                <p className="border-b border-gray-400 w-fit">{userType}</p>
               </div>
             </div>
 

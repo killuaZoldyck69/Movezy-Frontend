@@ -10,6 +10,11 @@ import MyParcels from "@/pages/DashBoard/User/MyParcels";
 import UpdateBooking from "@/pages/DashBoard/User/UpdateBooking";
 import HomePage from "@/pages/HomePage/HomePage";
 import { createBrowserRouter } from "react-router-dom";
+import PrivateRoute from "./PrivateRoutes";
+import AdminRoutes from "./AdminRoutes";
+import AllParcels from "@/pages/DashBoard/Admin/AllParcels";
+import AllUsers from "@/pages/DashBoard/Admin/AllUsers";
+import Statistics from "@/pages/DashBoard/Admin/Statistics";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -39,7 +44,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashBoardLayout></DashBoardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashBoardLayout></DashBoardLayout>
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
@@ -59,6 +68,40 @@ export const router = createBrowserRouter([
         element: <UpdateBooking></UpdateBooking>,
         loader: ({ params }) => fetch(`update-parcel/${params.id}`),
       },
+
+      // admin routes
+      {
+        path: "/dashboard/statistics",
+        element: (
+          <AdminRoutes>
+            <Statistics />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/all-users",
+        element: (
+          <AdminRoutes>
+            <AllUsers />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/all-parcels",
+        element: (
+          <AdminRoutes>
+            <AllParcels />
+          </AdminRoutes>
+        ),
+      },
+      // {
+      //   path: "/dashboard/all-delivery-men",
+      //   element: (
+      //     <AdminRoutes>
+      //       <AllDeliveryMen />
+      //     </AdminRoutes>
+      //   ),
+      // },
     ],
   },
 ]);

@@ -18,9 +18,10 @@ import {
 } from "react-icons/fa";
 import useAuth from "@/hooks/useAuth";
 import { Bounce, toast } from "react-toastify";
+import useType from "@/hooks/useType";
 
 const DashBoard = () => {
-  const userType = "user"; // Get userType
+  const [userType] = useType(); // Get userType
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Mobile sidebar state
   const { logoutUser } = useAuth();
   const notify = () =>
@@ -35,6 +36,8 @@ const DashBoard = () => {
       theme: "dark",
       transition: Bounce,
     });
+
+  console.log(userType);
 
   const handleLogout = () => {
     logoutUser().then(() => {
